@@ -15,6 +15,79 @@ class LinkedList {
     this.head = null;
   }
 
+  // Method optimized
+  //   removeDuplicates() {
+  //     let current = this.head;
+
+  //     if (this.head === null) {
+  //         return this.head;
+  //     }
+
+  //     while (current && current.next) {
+  //         if (current.data === current.next.data) {
+  //             current.next = current.next.next;
+  //         } else {
+  //             current = current.next;
+  //         }
+  //     }
+
+  //     return this.head;
+  // }
+
+  deleteDuplicatedNodes() {
+    let current = this.head;
+    let prev;
+    if (this.head === null) {
+      return "The list is empty";
+    }
+    while (current.next) {
+      prev = current;
+      current = current.next;
+      while (prev.next.data === current.data) {
+        current = current.next;
+      }
+      prev.next = current.next;
+    }
+    return this.head;
+  }
+  reverseListNodes() {
+    let current = this.head;
+    let answer = [];
+    let idx = 0;
+    if (this.head === null) {
+      return "La lista esta vacia";
+    } else {
+      while (current) {
+        answer.push(current.data);
+        current = current.next;
+      }
+      answer.reverse();
+      current = this.head;
+      while (current) {
+        current.data = answer[idx];
+        current = current.next;
+        idx++;
+      }
+      return this.head;
+    }
+  }
+  reverseList() {
+    let current = this.head;
+    let answer = [];
+    if (this.head === null) {
+      return "La lista esta vacia";
+    } else {
+      while (current) {
+        answer.unshift(current.data);
+        current = current.next;
+        console.log(answer);
+      }
+      answer.forEach((element) => {
+        console.log(element);
+      });
+    }
+  }
+
   deleteNode(position) {
     let nextNode;
     let current = this.head;
@@ -99,6 +172,9 @@ class LinkedList {
 const list1 = new LinkedList();
 
 list1.addFirst(10);
+list1.addFirst(10);
+list1.addFirst(20);
+list1.addFirst(20);
 list1.addFirst(20);
 list1.addFirst(30);
 list1.addFirst(40);
@@ -106,7 +182,7 @@ list1.addFirst(50);
 
 list1.addAtEnd(80);
 list1.addSpecificPosition(4, 1);
-list1.deleteNode(3);
+list1.deleteDuplicatedNodes();
 console.log(list1.printList());
 
 {
