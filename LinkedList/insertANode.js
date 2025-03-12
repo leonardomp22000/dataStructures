@@ -26,5 +26,16 @@ function nodeWithReference(referenceNode) {
   newNode.next = referenceNode.next;
   referenceNode.next = newNode;
 }
+
+function addAtEnd(head) {
+  const newNode = new Node(90);
+  let current = head;
+  while (current.next) {
+    current = current.next;
+  }
+  current.next = newNode;
+  return head;
+}
 nodeWithReference(head.next);
+head = addAtEnd(head);
 console.log(printElements(head));
